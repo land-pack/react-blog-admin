@@ -13,7 +13,11 @@ import {
   DisabledInput,
   TextInput,
   LongTextInput,
-  DateInput
+  DateInput,
+  SelectInput,
+  CheckboxGroupInput,
+  TabbedShowLayout,
+  Tab
 } from "react-admin";
 import BookIcon from "@material-ui/icons/Book";
 import { Redirect } from "react-router";
@@ -22,6 +26,10 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import { CardActions, ShowButton } from "react-admin";
+import { makeStyles } from "@material-ui/core/styles";
+import BigDog from "./assets/images/bigdog.jpg";
+import Avatar from "@material-ui/core/Avatar";
+// import Grid from "@material-ui/core/Grid";
 
 export const PostIcon = BookIcon;
 
@@ -78,24 +86,24 @@ const PostTitle = ({ record }) => {
   return <span>User {record ? `"${record.title}"` : ""}</span>;
 };
 
-export const XPostEdit = props => (
-  <Edit title={<PostTitle />} {...props}>
-    <SimpleForm>
-      <Card small className="mb-4 pt-3">
-        <CardHeader className="border-bottom text-center">
-          <DisabledInput source="id" />
-          <TextInput source="title" />
-          <TextInput source="teaser" />
-        </CardHeader>
-        <LongTextInput source="body" />
-        <DateInput label="Publication date" source="published_at" />
+// export const XPostEdit = props => (
+//   <Edit title={<PostTitle />} {...props}>
+//     <SimpleForm>
+//       <Card small className="mb-4 pt-3">
+//         <CardHeader className="border-bottom text-center">
+//           <DisabledInput source="id" />
+//           <TextInput source="title" />
+//           <TextInput source="teaser" />
+//         </CardHeader>
+//         <LongTextInput source="body" />
+//         <DateInput label="Publication date" source="published_at" />
 
-        <TextInput source="average_note" />
-        <DisabledInput label="Nb views" source="views" />
-      </Card>
-    </SimpleForm>
-  </Edit>
-);
+//         <TextInput source="average_note" />
+//         <DisabledInput label="Nb views" source="views" />
+//       </Card>
+//     </SimpleForm>
+//   </Edit>
+// );
 
 // const UserEditActions = ({ basePath, data, resource }) => (
 //   <CardActions>
@@ -122,17 +130,143 @@ const PostEditActions = ({ basePath, data, resource }) => (
 
 console.log(Edit);
 
-export const PostEdit = props => (
-  <Edit
-    title={<PostTitle />}
-    action={PostEditActions}
-    // undoable={false}
-    {...props}
-  >
-    <SimpleForm>
-      <TextInput source="title" />
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1
+  },
+  paper: {
+    padding: theme.spacing(2),
+    margin: "auto",
+    maxWidth: 500
+  },
+  image: {
+    width: 128,
+    height: 128
+  },
+  img: {
+    margin: "auto",
+    display: "block",
+    maxWidth: "100%",
+    maxHeight: "100%"
+  }
+}));
 
-      <TextInput source="teaser" />
-    </SimpleForm>
-  </Edit>
-);
+// export const PostEdit = props => (
+// export default function PostEdit() {
+export class PostEdit extends React.Component {
+  state = {
+    useStyles2: {},
+    useStyles: {
+      root: {
+        flexGrow: 1
+      },
+      paper: {
+        // padding: theme.spacing(2),
+        margin: "auto",
+        maxWidth: 500
+      },
+      image: {
+        width: 128,
+        height: 128
+      },
+      img: {
+        margin: "auto",
+        display: "block",
+        maxWidth: "100%",
+        maxHeight: "100%"
+      },
+      avatar: {
+        margin: 10
+      },
+      bigAvatar: {
+        margin: 1,
+        width: 120,
+        height: 120
+      }
+    }
+  };
+  componentWillMount() {
+    this.state.useStyles2 = makeStyles(theme => ({
+      root: {
+        flexGrow: 1
+      },
+      paper: {
+        padding: theme.spacing(2),
+        margin: "auto",
+        maxWidth: 500
+      },
+      image: {
+        width: 128,
+        height: 128
+      },
+      img: {
+        margin: "auto",
+        display: "block",
+        maxWidth: "100%",
+        maxHeight: "100%"
+      }
+    }));
+    // this.state.useStyles = this.state.useStyles2();
+    console.log("componentWillMount");
+  }
+
+  componentDidMount() {
+    // console.log(this.state.useStyles2.root);
+    console.log("componentDidMount");
+  }
+  render() {
+    // const { props } = { ...useStyles };
+    return (
+      <Edit
+        title={<PostTitle />}
+        action={PostEditActions}
+        // undoable={false}
+        {...this.props}
+      >
+        <TabbedShowLayout>
+          <Tab label="summary">
+            <SimpleForm>
+              <Grid container justify="left" alignItems="left">
+                <Avatar
+                  sizes="128"
+                  alt="Remy Sharp"
+                  src={BigDog}
+                  className={this.state.useStyles.avatar}
+                />
+              </Grid>
+
+              <SelectInput
+                source="What do you do?"
+                choices={[
+                  { id: "programming", name: "Programming" },
+                  { id: "UX", name: "UX" },
+                  { id: "photography", name: "Photography" }
+                ]}
+              />
+
+              <CheckboxGroupInput
+                label="What should your homepage include?"
+                source="wsmhi"
+                choices={[
+                  { id: "skill", name: "skills" },
+                  { id: "edu", name: "education" },
+                  { id: "exp", name: "Experience" },
+                  { id: "ser", name: "Services" },
+                  { id: "por", name: "Portfolio" }
+                ]}
+              />
+              <TextInput source="title" label="How do peope call you?" />
+
+              <TextInput source="teaser" />
+            </SimpleForm>
+          </Tab>
+          <Tab label="Miscellaneous" path="miscellaneous">
+            <SimpleForm>
+              <h1>Hello </h1>
+            </SimpleForm>
+          </Tab>
+        </TabbedShowLayout>
+      </Edit>
+    );
+  }
+}

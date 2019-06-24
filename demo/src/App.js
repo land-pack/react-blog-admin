@@ -7,36 +7,20 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { makeStyles } from "@material-ui/core/styles";
 import Example from "./NewPosts";
 import ComplexGrid from "./layouts/s";
-import Demo from "./demo/ex01";
-
-import styles from "react";
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1
-  },
-  paper: {
-    height: 140,
-    width: 100
-  },
-  control: {
-    padding: theme.spacing(2)
-  }
-}));
+import Demo from "./ui/ex02";
 
 function App() {
-  const classes = useStyles();
-  // return (
-  //   <Admin dataProvider={simpleRestProvider("http://localhost:5000")}>
-  //     <Resource
-  //       options={{ label: "Resumes" }}
-  //       name="posts"
-  //       list={TabbedDatagrid}
-  //       edit={PostEdit}
-  //     />
-  //   </Admin>
-  // );
-  return <SpacingGrid className={classes.root} />;
+  return (
+    <Admin dataProvider={simpleRestProvider("http://localhost:5000")}>
+      <Resource
+        options={{ label: "Resumes" }}
+        name="posts"
+        list={TabbedDatagrid}
+        edit={PostEdit}
+      />
+    </Admin>
+  );
+  // return <Demo />;
 
   // return <ComplexGrid />;
 }
