@@ -1,8 +1,8 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/Cellar/yarn/1.15.2/libexec/bin/yarn.js add simpleRestProvider
+  /usr/local/bin/node /usr/local/Cellar/yarn/1.15.2/libexec/bin/yarn.js add reactjs-admin
 
 PATH: 
-  /Users/frank/.cargo/bin:/usr/local/opt/mysql-client/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/frank/.cargo/bin:/usr/local/opt/mysql-client/bin:/usr/local/go/bin:/usr/local/go/bin
+  /Users/frank/.virtualenvs/myvenv/bin:/Users/frank/.cargo/bin:/usr/local/opt/mysql-client/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/frank/.cargo/bin:/usr/local/opt/mysql-client/bin:/usr/local/go/bin:/usr/local/go/bin
 
 Yarn version: 
   1.15.2
@@ -14,7 +14,7 @@ Platform:
   darwin x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/simpleRestProvider: Not found
+  Error: https://registry.yarnpkg.com/reactjs-admin: Not found
       at Request.params.callback [as _callback] (/usr/local/Cellar/yarn/1.15.2/libexec/lib/cli.js:66058:18)
       at Request.self.callback (/usr/local/Cellar/yarn/1.15.2/libexec/lib/cli.js:129541:22)
       at Request.emit (events.js:189:13)
@@ -29,6 +29,7 @@ Trace:
 npm manifest: 
   {
     "dependencies": {
+      "ra-data-simple-rest": "^2.9.3",
       "react-admin": "^2.9.3"
     }
   }
@@ -666,6 +667,14 @@ Lockfile:
       redux-form "~7.4.0"
       redux-saga "~0.16.0"
       reselect "~3.0.0"
+  
+  ra-data-simple-rest@^2.9.3:
+    version "2.9.3"
+    resolved "https://registry.yarnpkg.com/ra-data-simple-rest/-/ra-data-simple-rest-2.9.3.tgz#7d87a3096c5655b5baf3f60932e111a0539442e0"
+    integrity sha512-v/bFXvuvxuk9HYeNFZ9BGSaU2Vwh3qAEzZN7h1wotGY9J/Spz4Xa/rNnkuy2zlFP4Eh0wnkCu/u7UBeLhJui1w==
+    dependencies:
+      query-string "~5.1.1"
+      ra-core "^2.9.3"
   
   ra-language-english@^2.9.3:
     version "2.9.3"

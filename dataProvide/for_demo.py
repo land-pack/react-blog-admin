@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_restful  import Resource, Api, reqparse, abort
 from flask_cors import CORS
 
@@ -45,6 +45,8 @@ class PostApi(Resource):
         data = {
             "id": 1,
             "title": "frank",
+            "teaser": "123",
+            "body": "hello jajajajaj",
             "published_at": "2019-09-12",
             "average_note": "222",
             "views": 12
@@ -58,6 +60,8 @@ class PostApi(Resource):
         data = {
             "id": 1,
             "title": "frank",
+            "teaser": "123",
+            "body": "hello jajajajaj",
             "published_at": "2019-09-12",
             "average_note": "222",
             "views": 12
@@ -68,9 +72,12 @@ class PostApi(Resource):
             "Access-Control-Allow-Origin": "*"}
 
     def put(self, id):
+        print("update --> ", request.json)
         data = {
             "id": 1,
             "title": "frank",
+            "teaser": "123",
+            "body": "hello jajajajaj",
             "published_at": "2019-09-12",
             "average_note": "222",
             "views": 12
